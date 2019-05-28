@@ -1,0 +1,29 @@
+/* main.wxss */
+@import "../../style/weui.wxss";
+
+page {
+  background: #f6f6f6;
+}
+.margin-t40 {
+  margin-top: 40rpx;
+}
+.page-section{
+  margin-bottom: 20rpx;
+}
+.flex-wrp {display: flex;}
+.flex-item{
+  width: 50%;
+  height: 250rpx;
+  line-height: 250rpx;
+  margin: 10rpx;
+  text-align: center;
+  border: 1rpx solid #ccc;
+  border-radius: 20rpx;
+  vertical-align: middle;
+  background: white;
+}
+/* .bc_feature {}
+.bc_history {}
+.bc_remark {}
+.bc_mood {} */
+

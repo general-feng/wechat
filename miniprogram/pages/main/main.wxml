@@ -1,0 +1,25 @@
+<view>
+  <view class="flex-wrp section" style="flex-direction:row;">
+    <view class="flex-item bc_feature">待办</view>
+    <view class="flex-item bc_history">已办</view>
+  </view>
+  <view class="flex-wrp section" style="flex-direction:row;">
+    <view class="flex-item bc_remark">备忘</view>
+    <view class="flex-item bc_mood">心情</view>
+  </view>
+
+  
+  <input class='margin-t40' placeholder="请输入姓名" value="{{name}}" bindinput="bindKeyInputName" />
+  <input class='margin-t40' placeholder="请输入年龄" value="{{age}}" bindinput="bindKeyInputAge" />
+  <button class='margin-t40' bindtap='insertData'>插入数据</button>
+  <input class='margin-t40' placeholder="请输入记录ID" value="{{recordId}}" bindinput="bindKeyInputId" />
+
+  <button class='margin-t40' bindtap='queryData'>查询数据</button>
+
+  <text class='margin-t40'>
+     姓名：{{nameResult}}
+  </text>
+  <text class='margin-t40'>
+     年龄：{{ageResult}}
+  </text>
+</view>
