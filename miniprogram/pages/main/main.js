@@ -7,12 +7,8 @@ Page({
    */
   db: undefined,
   test: undefined,
-  data: {
-    name: '',
-    age: '',
-    recordId: '',
-    nameResult: '',
-    ageResult: ''
+  data:{
+    notes: [],
   },
 
   /**
@@ -21,15 +17,26 @@ Page({
   onLoad: function (options) {
     var that = this
     //  调用login云函数获取openid
+    
     wx.cloud.callFunction({
       name: 'login',
       data: {},
       success: res => {
         console.log('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
-        wx.cloud.init({ env: 'test' })
-        that.db = wx.cloud.database()
-        that.test = that.db.collection('mini-test')
+        wx.cloud.callFunction({
+          data: {
+            openid: app.globalData.openid,
+            method: 'get'
+          },
+          name: 'getMemorandum',
+          success: res => {
+            console.log(res)
+            this.setData({
+              notes:res.result || []
+            })
+          }
+        })
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
@@ -41,57 +48,17 @@ Page({
 
   },
   // 单击“插入数据”按钮调用该函数
-  insertData: function () {
-    var that = this
-    try {
-      //  将年龄转换为整数类型值
-      var age = parseInt(that.data.age)
-      //  如果输入的年龄不是数字，会显示错误对话框，并退出该函数
-      if (isNaN(age)) {
-        //  显示错误对话框
-        wx.showModal({
-          title: '错误',
-          content: '请输入正确的年龄',
-          showCancel: false
-        })
-        return
-      }
-      //  向test数据集添加记录
-      this.test.add({
-        // data 字段表示需新增的 JSON 数据
-        data: {
-          name: that.data.name,
-          age: age
-        },
-        //  数据插入成功，调用该函数
-        success: function (res) {
-          console.log(res)
-          wx.showModal({
-            title: '成功',
-            content: '成功插入记录',
-            showCancel: false
-          })
-          that.setData({
-            name: '',
-            age: ''
-          })
-        }
-      })
-    }
-    catch (e) {
-      wx.showModal({
-        title: '错误',
-        content: e.message,
-        showCancel: false
-      })
-
-    }
+  insertData: function (type) {
+    const t = type.target.dataset.type;
+    wx.navigateTo({
+      url: `../editMemory/editMemory?type=${t}`,
+    })
   },
   //  单击“查询数据”按钮执行该函数
   queryData: function () {
     var that = this
     //  根据记录ID搜索数据集  
-    this.db.collection('mini-test').doc(this.data.recordId).get({
+    this.db.collection('mini-test').doc(this.data.searchName).get({
       // 找到记录集调用
       success: function (res) {
         //  将查询结果显示在页面上  
@@ -128,5 +95,20 @@ Page({
       recordId: e.detail.value
     })
   },
-
+  onShow(){
+    if (!app.globalData.openid)return
+    wx.cloud.callFunction({
+      data: {
+        openid: app.globalData.openid,
+        method: 'get'
+      },
+      name: 'getMemorandum',
+      success: res => {
+        console.log(res)
+        this.setData({
+          notes: res.result || []
+        })
+      }
+    })
+  }
 })

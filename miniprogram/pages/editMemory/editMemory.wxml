@@ -1,0 +1,12 @@
+<!--pages/editMemory/editMemory.wxml-->
+<view  class='title'>
+<text>{{theme}}</text>
+</view>
+<view>
+<input class='m-30 input' placeholder="标题" value="{{title}}" bindinput="bindTitle" />
+
+</view>
+<view class="row">
+<textarea class='m-30' placeholder="开始书写" value="{{area}}" id="textarea" bindinput="bindArea"></textarea>
+</view>
+<button class='bt save' bindtap='save'>保存</button>

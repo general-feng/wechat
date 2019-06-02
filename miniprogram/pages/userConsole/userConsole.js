@@ -2,18 +2,20 @@
 Page({
 
   data: {
-    openid: ''
+    openid: '',
+    name: ''
   },
 
   onLoad: function (options) {
     this.setData({
-      openid: getApp().globalData.openid
+      openid: getApp().globalData.openid,
+      name: 'feng'
     })
 
     wx.cloud.init({ env: 'test' })
     const db = wx.cloud.database()
     const test = db.collection('mini-test')
-
+    console.log(test)
     test.add({
       // data 字段表示需新增的 JSON 数据
       data: {
