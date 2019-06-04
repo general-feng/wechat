@@ -1,14 +1,21 @@
 <view>
-  <view class="flex-wrp section" style="flex-direction:row;">
-    <view class="flex-item bc_feature" bindtap='insertData' data-type='0'>待办</view>
-    <view class="flex-item bc_history"  bindtap='insertData' data-type='1'>已办</view>
+  <view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">待办</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">已办</view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">备忘</view>
+    <!-- <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">日记</view> -->
   </view>
-  <view class="flex-wrp section" style="flex-direction:row;">
-    <view class="flex-item bc_remark" bindtap='insertData' data-type='2'>备忘</view>
-    <view class="flex-item bc_mood" bindtap='insertData' data-type='3'>心情</view>
-  </view>
-<view style="flex-direction:row;" wx:for="{{notes}}">
- {{item.title}}
- {{item.area}}
+  <button class='bt add' bindtap='insertData'>+</button>
+  <view class="note-section">
+    <view class="note-list" style="flex-direction:row;" wx:for="{{notes}}" wx:key="index">
+      <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="note-list_del txt">
+        <text class="note-content title">{{item.title}}</text>
+        <text class="note-content content">{{item.area}}</text>
+      </view>
+      <view data-index="{{index}}" class="note-list_del handle">
+        <view wx:if="{{currentTab == '0'}}" class="change" bindtap="changeItem">标记为已办</view>
+        <view class="del" bindtap="delItem">删除</view>
+      </view>
+    </view>
   </view>
 </view>

@@ -4,26 +4,108 @@
 page {
   background: #f6f6f6;
 }
-.margin-t40 {
-  margin-top: 40rpx;
+/* 顶部tab样式 */
+.swiper-tab{
+	width: 100%;
+	border-bottom: 1rpx solid #dcdee2;
+	text-align: center;
+	line-height: 80rpx;
 }
-.page-section{
-  margin-bottom: 20rpx;
+.swiper-tab-list{  
+  font-size: 30rpx;
+  display: inline-block;
+	width: 33.33%;
+	color: #515a6e;
 }
-.flex-wrp {display: flex;}
-.flex-item{
-  width: 50%;
-  height: 250rpx;
-  line-height: 250rpx;
+.on{ 
+  color: #5095f7;
+	border-bottom: 5rpx solid #5095f7;
+}
+.swiper-box{ 
+  display: block; 
+  height: 100%; 
+  width: 100%; 
+  overflow: hidden; 
+}
+.swiper-box view{
+	text-align: center;
+}
+/* 事件内容样式 */
+.note-section {
+  display: block;
+  padding: 20rpx;
+  text-align: left;
+}
+.note-list {
+  position: relative;
+  height: 130rpx;
   margin: 10rpx;
-  text-align: center;
-  border: 1rpx solid #ccc;
-  border-radius: 20rpx;
-  vertical-align: middle;
-  background: white;
+  padding-left: 20rpx;
+  background-color: #fff;
 }
-/* .bc_feature {}
-.bc_history {}
-.bc_remark {}
-.bc_mood {} */
-
+.note-content {
+  display: block;
+  height: 50rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
+.title {
+  font-size: 16px;
+  color: #4B4D53;
+}
+.content {
+  font-size: 12px;
+  color: #666970;
+}
+/* 左滑按钮外层包裹视图 */
+.note-list_del{ 
+  position: absolute; 
+  top:0; 
+} 
+.note-list_del.txt{ 
+  position: relative;
+  background-color: #fff; 
+  width: 100%;
+  height: 100%; 
+  z-index: 5; 
+  padding:0 10rpx; 
+  transition: left 0.2s ease-in-out; 
+  white-space:nowrap; 
+  overflow:hidden; 
+  text-overflow:ellipsis; 
+}
+/* 左滑按钮 */
+.note-list_del.handle{
+  height: 130rpx;
+  line-height: 130rpx;
+  text-align: center;
+  z-index: 4; 
+  right: 0; 
+  font-size: 12px;
+  color: #fff 
+}
+.change{
+  display: inline-block;
+  background-color: #ccc; 
+  width: 230rpx;
+}
+.del{
+  display: inline-block;
+  background-color: #e64340; 
+  width: 180rpx;
+}
+/* 新增按钮 */
+.bt{
+  height: 130rpx;
+  line-height: 130rpx;
+  margin: 20rpx 20rpx 0;
+  background-color: #fff;
+  border: 5rpx dashed #dcdee2;
+  vertical-align: top;
+}
+.add {
+  font-size: 30px;
+  font-weight: bolder;
+  color: #515a6e;
+}

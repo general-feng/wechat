@@ -7,7 +7,7 @@ page{
 .title{
   text-align: center;
   font-size: 48rpx;
-  color: #37c0c2;
+  color: #5095f7;
   width:100%
 }
 .input {
@@ -22,7 +22,7 @@ textarea{
   font-size: 30rpx;
 }
 .bt{
-  background: rgb(16, 230, 245);
+  background: #5095f7;
   box-sizing: border-box;
 }
 button.save{

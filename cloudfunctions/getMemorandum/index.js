@@ -7,7 +7,8 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   console.log(event);
   const results = await db.collection('memory').where({
-    openid: event.openid
+    openid: event.openid,
+    evtType: event.evtType
   }).get();
   return results.data;
 }

@@ -7,6 +7,7 @@ Page({
    */
   data: {
     theme: '',
+    evtType: '',
     title: '',
     area:''
   },
@@ -26,6 +27,7 @@ Page({
     wx.cloud.callFunction({
       data: {
         type: 'add',
+        evtType: this.data.evtType,
         title: this.data.title,
         area: this.data.area,
         openid: app.globalData.openid
@@ -58,7 +60,8 @@ Page({
   onLoad: function (options) {
     const theme = ['待办事宜','已办事宜','备忘','随笔'][options.type];
     this.setData({
-      theme: theme
+      theme: theme,
+      evtType: options.type
     });
   },
 

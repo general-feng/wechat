@@ -17,24 +17,5 @@
     "navigationBarTitleText": "云开发 QuickStart",
     "navigationBarTextStyle": "black"
   },
-  "tabBar": {
-    "color": "#a9b7b7",
-    "selectedColor": "#11cd6e",
-    "borderStyle": "white",
-    "list": [
-      {
-        "pagePath": "pages/homePage/homePage",
-        "text": "查看"
-      },
-      {
-        "pagePath": "pages/main/main",
-        "text": "新增"
-      },
-      {
-        "pagePath": "pages/userConsole/userConsole",
-        "text": "个人信息"
-      }
-    ]
-  },
   "sitemapLocation": "sitemap.json"
 }
