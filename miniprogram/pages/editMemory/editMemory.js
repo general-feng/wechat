@@ -71,6 +71,9 @@ Page({
   onLoad: function (options) {
     const theme = ['待办事宜', '已办事宜', '备忘', '随笔'][options.type], id = Number(options.id);
     console.log(options)
+    if(!id) {
+      return;
+    }
     wx.cloud.callFunction({
       data: {
         id: id,
