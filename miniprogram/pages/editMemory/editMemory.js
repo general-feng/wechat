@@ -10,7 +10,8 @@ Page({
     theme: '',
     evtType: '',
     title: '',
-    area:''
+    area:'',
+    id:0,
     // time: ''
   },
   bindTitle: function (e) {
@@ -39,7 +40,8 @@ Page({
         title: this.data.title,
         area: this.data.area,
         time: time,
-        openid: app.globalData.openid
+        openid: app.globalData.openid,
+        method: 'add'
       },
       method: 'post',
       name: 'saveMemorandum',
@@ -67,7 +69,33 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const theme = ['待办事宜','已办事宜','备忘','随笔'][options.type];
+    const theme = ['待办事宜', '已办事宜', '备忘', '随笔'][options.type], id = Number(options.id);
+    console.log(options)
+    wx.cloud.callFunction({
+      data: {
+        id: id,
+        openid: app.globalData.openid,
+      },
+      method: 'post',
+      name: 'getMemorandumDetail',
+      success: res => {
+        const note = res.result[0];
+        this.setData({
+          title: note.title,
+          area: note.area,
+          id: note._id
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+        wx.showModal({
+          title: '错误',
+          content: '没有找到记录',
+          showCancel: false
+        })
+        wx.navigateBack();
+      }
+    });
     this.setData({
       theme: theme,
       evtType: options.type

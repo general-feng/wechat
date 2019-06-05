@@ -10,16 +10,33 @@ exports.main = async (event, context) => {
   }
   const wxContext = cloud.getWXContext();
   const db = cloud.database()
-  await db.collection('memory').add({
-    data:{
-      _id: event.id,
-      openid: event.openid,
-      evtType: event.evtType,
-      title: event.title,
-      area: event.area,
-      time: event.time
-    }
-  })
+  if(event.method == 'add') {
+    await db.collection('memory').add({
+      data: {
+        _id: event.id,
+        openid: event.openid,
+        evtType: event.evtType,
+        title: event.title,
+        area: event.area,
+        time: event.time
+      }
+    })
+  }
+  if (event.method == 'update') {
+    await db.collection('memory').where({
+      _id: event.id
+    })
+    .update({
+      data: {
+        evtType: event.evtType,
+      }
+    })
+  }
+  if (event.method == 'delete') {
+    await db.collection('memory').where({
+      _id: event.id
+    }).remove()
+  }
   return {
     event,
     openid: wxContext.OPENID,

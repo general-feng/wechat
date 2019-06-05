@@ -61,20 +61,7 @@ Page({
    */
   onShow(){
     if (!app.globalData.openid)return
-    wx.cloud.callFunction({
-      data: {
-        openid: app.globalData.openid,
-        evtType: this.data.currentTab,
-        method: 'get'
-      },
-      name: 'getMemorandum',
-      success: res => {
-        console.log(res)
-        this.setData({
-          notes: res.result || []
-        })
-      }
-    })
+    this.getNotes()
   },
   /**
    * 点击tab切换
@@ -88,19 +75,7 @@ Page({
         currentTab: e.target.dataset.current,
         delBtnWidth: e.target.dataset.current == '0' ? 415 : 185
       })
-      wx.cloud.callFunction({
-        data: {
-          openid: app.globalData.openid,
-          evtType: that.data.currentTab,
-          method: 'get'
-        },
-        name: 'getMemorandum',
-        success: res => {
-          that.setData({
-            notes: res.result || []
-          })
-        }
-      })
+      that.getNotes()
     }
   },
   // 单击新增按钮调用该函数
@@ -108,6 +83,22 @@ Page({
     const type = this.data.currentTab;
     wx.navigateTo({
       url: `../editMemory/editMemory?type=${type}`,
+    })
+  },
+  getNotes(){
+    var that = this;
+    wx.cloud.callFunction({
+      data: {
+        openid: app.globalData.openid,
+        evtType: that.data.currentTab,
+        method: 'get'
+      },
+      name: 'getMemorandum',
+      success: res => {
+        that.setData({
+          notes: res.result || []
+        })
+      }
     })
   },
   // 开始滑动事件
@@ -178,21 +169,46 @@ Page({
   },
   //点击标记为已办按钮事件 
   changeItem: function (e) {
-
+    const id = e.target.dataset.id;
+    wx.cloud.callFunction({
+      data: {
+        openid: app.globalData.openid,
+        evtType: '1',
+        id: id,
+        method: 'update'
+      },
+      name: 'saveMemorandum',
+      success: res => {
+        that.getNotes()        
+      }
+    })
   },
   //点击删除按钮事件 
   delItem: function (e) {
+    const id = e.target.dataset.id;
     var that = this;
     // 打印出当前选中的index
     console.log(e.currentTarget.dataset.index);
     // 获取到列表数据
     var notes = that.data.notes;
     // 删除
-    notes.splice(e.currentTarget.dataset.index, 1);
-    // 重新渲染
-    that.setData({
-      notes: notes
+    wx.cloud.callFunction({
+      data: {
+        openid: app.globalData.openid,
+        id: id,
+        method: 'delete'
+      },
+      name: 'saveMemorandum',
+      success: res => {
+        that.getNotes()
+      }
     })
-    initdata(that)
+  },
+  //查看
+  viewNote(e){
+    const type = this.data.currentTab, id = e.target.dataset.id;
+    wx.navigateTo({
+      url: `../editMemory/editMemory?type=${type}&id=${id}`,
+    })
   }
 })
