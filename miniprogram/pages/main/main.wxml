@@ -10,7 +10,7 @@
     <view class="note-list" style="flex-direction:row;" wx:for="{{notes}}" wx:key="index">
       <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="note-list_del txt">
         <text class="note-content title">{{item.title}}</text>
-        <text class="note-content content">{{item.area}}</text>
+        <text class="note-content content">{{item.time}} {{item.area}}</text>
       </view>
       <view data-index="{{index}}" class="note-list_del handle">
         <view wx:if="{{currentTab == '0'}}" class="change" bindtap="changeItem">标记为已办</view>

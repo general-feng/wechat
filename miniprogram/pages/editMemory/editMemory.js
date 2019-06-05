@@ -1,4 +1,5 @@
 // pages/editMemory/editMemory.js
+var util = require('../../utils/util.js');
 const app = getApp()
 Page({
 
@@ -10,6 +11,7 @@ Page({
     evtType: '',
     title: '',
     area:''
+    // time: ''
   },
   bindTitle: function (e) {
     this.setData({
@@ -24,12 +26,19 @@ Page({
   save: function () {
     var that = this
     console.log(this)
+    // 调用函数时，传入new Date()参数，返回值是日期和时间
+    var time = util.formatDate(new Date());
+    // 再通过setData更改Page()里面的data，动态更新页面的数据
+    // this.setData({
+    //   time: time
+    // });
     wx.cloud.callFunction({
       data: {
         type: 'add',
         evtType: this.data.evtType,
         title: this.data.title,
         area: this.data.area,
+        time: time,
         openid: app.globalData.openid
       },
       method: 'post',

@@ -16,7 +16,8 @@ exports.main = async (event, context) => {
       openid: event.openid,
       evtType: event.evtType,
       title: event.title,
-      area: event.area
+      area: event.area,
+      time: event.time
     }
   })
   return {
