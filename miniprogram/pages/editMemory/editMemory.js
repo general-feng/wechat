@@ -2,17 +2,16 @@
 var util = require('../../utils/util.js');
 const app = getApp()
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     theme: '',
     evtType: '',
+    optType: '',
     title: '',
     area:'',
-    id:0,
-    // time: ''
+    id:0
   },
   bindTitle: function (e) {
     this.setData({
@@ -26,51 +25,80 @@ Page({
   },
   save: function () {
     var that = this
-    console.log(this)
     // 调用函数时，传入new Date()参数，返回值是日期和时间
     var time = util.formatDate(new Date());
-    // 再通过setData更改Page()里面的data，动态更新页面的数据
-    // this.setData({
-    //   time: time
-    // });
-    wx.cloud.callFunction({
-      data: {
-        type: 'add',
-        evtType: this.data.evtType,
-        title: this.data.title,
-        area: this.data.area,
-        time: time,
-        openid: app.globalData.openid,
-        method: 'add'
-      },
-      method: 'post',
-      name: 'saveMemorandum',
-      success: res => {
-        console.log(res)
-        wx.showModal({
-          title: '成功',
-          content: '保存成功！',
-          showCancel: false
-        })
-        wx.navigateBack();
-      },
-      fail: function (res) {
-        console.log(res)
-        wx.showModal({
-          title: '错误',
-          content: '没有找到记录',
-          showCancel: false
-        })
-      }
-    })
-
+    if (this.data.optType === 'update') {
+      wx.cloud.callFunction({
+        data: {
+          id: this.data.id,
+          title: this.data.title,
+          area: this.data.area,
+          time: time,
+          openid: app.globalData.openid,
+          method: 'update'
+        },
+        method: 'post',
+        name: 'saveMemorandum',
+        success: res => {
+          console.log(res)
+          wx.showModal({
+            title: '成功',
+            content: '更新成功！',
+            showCancel: false
+          })
+          wx.navigateBack();
+        },
+        fail: function (res) {
+          console.log(res)
+          wx.showModal({
+            title: '错误',
+            content: '没有找到记录',
+            showCancel: false
+          })
+        }
+      })
+    } else {
+      wx.cloud.callFunction({
+        data: {
+          evtType: this.data.evtType,
+          title: this.data.title,
+          area: this.data.area,
+          time: time,
+          openid: app.globalData.openid,
+          method: 'add'
+        },
+        method: 'post',
+        name: 'saveMemorandum',
+        success: res => {
+          console.log(res)
+          wx.showModal({
+            title: '成功',
+            content: '保存成功！',
+            showCancel: false
+          })
+          wx.navigateBack();
+        },
+        fail: function (res) {
+          console.log(res)
+          wx.showModal({
+            title: '错误',
+            content: '没有找到记录',
+            showCancel: false
+          })
+        }
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const theme = ['待办事宜', '已办事宜', '备忘', '随笔'][options.type], id = Number(options.id);
-    console.log(options)
+    const theme = ['待办事宜', '已办事宜', '备忘', '随笔'][options.evtTtype], id = Number(options.id);
+    this.setData({
+      theme: theme,
+      evtType: options.evtTtype,
+      optType: options.optType
+    });
     if(!id) {
       return;
     }
@@ -98,10 +126,6 @@ Page({
         })
         wx.navigateBack();
       }
-    });
-    this.setData({
-      theme: theme,
-      evtType: options.type
     });
   },
 

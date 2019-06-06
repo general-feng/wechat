@@ -1,15 +1,30 @@
 {
   "pages": [
     "pages/main/main",
-    "pages/homePage/homePage",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole",
-    "pages/databaseGuide/databaseGuide",
-    "pages/addFunction/addFunction",
-    "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib",
+    "pages/user/user",
     "pages/editMemory/editMemory"
   ],
+  "tabBar": {
+    "custom": true,
+    "color": "#515a6e",
+    "selectedColor": "#5095f7",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/main/main",
+        "iconPath": "images/createtask.png",
+        "selectedIconPath": "images/createtask_fill.png",
+        "text": "事项列表"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "images/card.png",
+        "selectedIconPath": "images/card_fill.png",
+        "text": "个人信息"
+      }
+    ]
+  },
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",

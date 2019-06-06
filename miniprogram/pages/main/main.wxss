@@ -102,10 +102,14 @@ page {
   margin: 20rpx 20rpx 0;
   background-color: #fff;
   border: 5rpx dashed #dcdee2;
-  vertical-align: top;
 }
 .add {
   font-size: 30px;
   font-weight: bolder;
   color: #515a6e;
+}
+.add_img {
+  width: 90rpx;
+  height: 90rpx;
+  margin-top: 15rpx;
 }

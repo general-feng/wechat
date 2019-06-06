@@ -23,14 +23,27 @@ exports.main = async (event, context) => {
     })
   }
   if (event.method == 'update') {
-    await db.collection('memory').where({
-      _id: event.id
-    })
-    .update({
-      data: {
-        evtType: event.evtType,
-      }
-    })
+    if (event.evtType) {
+      await db.collection('memory').where({
+        _id: event.id
+      })
+        .update({
+          data: {
+            evtType: event.evtType,
+          }
+        })
+    } else {
+      await db.collection('memory').where({
+        _id: event.id
+      })
+        .update({
+          data: {
+            title: event.title,
+            area: event.area,
+            time: event.time
+          }
+        })
+    }
   }
   if (event.method == 'delete') {
     await db.collection('memory').where({

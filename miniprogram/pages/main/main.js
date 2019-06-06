@@ -60,6 +60,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow(){
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0
+      })
+    }
     if (!app.globalData.openid)return
     this.getNotes()
   },
@@ -170,6 +176,7 @@ Page({
   //点击标记为已办按钮事件 
   changeItem: function (e) {
     const id = e.target.dataset.id;
+    var that = this;
     wx.cloud.callFunction({
       data: {
         openid: app.globalData.openid,
@@ -206,9 +213,9 @@ Page({
   },
   //查看
   viewNote(e){
-    const type = this.data.currentTab, id = e.target.dataset.id;
+    const curType = this.data.currentTab, id = e.target.dataset.id;
     wx.navigateTo({
-      url: `../editMemory/editMemory?type=${type}&id=${id}`,
+      url: `../editMemory/editMemory?evtTtype=${curType}&id=${id}&optType=update`,
     })
   }
 })
