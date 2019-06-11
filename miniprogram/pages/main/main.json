@@ -1,6 +1,4 @@
 {
   "navigationBarTitleText": "柠檬微日记",
-  "usingComponents": {
-    "tabbar": "/pages/custom-tab-bar/index"
-  }
+  "usingComponents": { }
 }
