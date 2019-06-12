@@ -17,9 +17,10 @@ Page({
   db: undefined,
   test: undefined,
   data:{
-    delBtnWidth: 415, //删除按钮宽度单位（rpx）
+    delBtnWidth: 335, //删除按钮宽度单位（rpx）
     notes: [],
     currentTab: '0',
+    moveWidth: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -43,7 +44,8 @@ Page({
           name: 'getMemorandum',
           success: res => {
             that.setData({
-              notes:res.result || []
+              notes: res.result || [],
+              moveWidth: `width:calc(100vw - ${that.data.delBtnWidth + 50}rpx)`
             })
           }
         })
@@ -79,7 +81,7 @@ Page({
     } else {
       that.setData({
         currentTab: e.target.dataset.current,
-        delBtnWidth: e.target.dataset.current == '0' ? 415 : 185
+        delBtnWidth: e.target.dataset.current == '0' ? 335 : 125
       })
       that.getNotes()
     }
@@ -102,10 +104,73 @@ Page({
       name: 'getMemorandum',
       success: res => {
         that.setData({
-          notes: res.result || []
+          notes: res.result || [],
+          moveWidth: `width:calc(100vw - ${that.data.delBtnWidth + 50}rpx)`
         })
       }
     })
+  },
+  /**
+* 显示删除按钮
+*/
+  showDeleteButton: function (e) {
+    let noteIndex = e.currentTarget.dataset.index
+    //delBtnWidth 为右侧按钮区域的宽度
+    var delBtnWidth = this.data.delBtnWidth;
+    this.setXmove(noteIndex, -delBtnWidth)
+  },
+  /**
+   * 隐藏删除按钮
+   */
+  hideDeleteButton: function (e) {
+    let noteIndex = e.currentTarget.dataset.index
+    this.setXmove(noteIndex, 0)
+  },
+  /**
+   * 设置movable-view位移
+   */
+  setXmove: function (noteIndex, xmove) {
+    let notes = this.data.notes
+    notes[noteIndex].xmove = xmove
+    this.setData({
+      notes: notes
+    })
+  },
+  /**
+   * 处理movable-view移动事件
+   */
+  handleMovableChange: function (e) {
+    //delBtnWidth 为右侧按钮区域的宽度
+    var delBtnWidth = this.data.delBtnWidth;
+    if (e.detail.source === 'friction') {
+      if (e.detail.x < -(delBtnWidth / 2)) {
+        this.showDeleteButton(e)
+      } else {
+        this.hideDeleteButton(e)
+      }
+    } else if (e.detail.source === 'out-of-bounds' && e.detail.x === 0) {
+      this.hideDeleteButton(e)
+    }
+  },
+  /**
+   * 处理touchstart事件
+   */
+  handleTouchStart(e) {
+    this.startX = e.touches[0].pageX
+  },
+  /**
+   * 处理touchend事件
+   */
+  handleTouchEnd(e) {
+    //delBtnWidth 为右侧按钮区域的宽度
+    var delBtnWidth = this.data.delBtnWidth;
+    if (e.changedTouches[0].pageX < this.startX && e.changedTouches[0].pageX - this.startX <= -(delBtnWidth / 2)) {
+      this.showDeleteButton(e)
+    } else if (e.changedTouches[0].pageX > this.startX && e.changedTouches[0].pageX - this.startX < (delBtnWidth / 2)) {
+      this.showDeleteButton(e)
+    } else {
+      this.hideDeleteButton(e)
+    }
   },
   // 开始滑动事件
   touchS: function (e) {

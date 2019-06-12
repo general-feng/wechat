@@ -8,10 +8,22 @@
   <button class='bt add' catchtap='insertData'><image src="/images/add.png" class="add_img"></image></button>
   <view class="note-section">
     <view class="note-list" style="flex-direction:row;" wx:for="{{notes}}" wx:key="index">
-      <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.txtStyle}}" class="note-list_del txt"  data-id="{{item._id}}" catchtap="viewNote">
-        <text class="note-content title" data-id="{{item._id}}">{{item.title}}</text>
-        <text class="note-content content" data-id="{{item._id}}">{{item.time}} {{item.area}}</text>
-      </view>
+      <movable-area style="{{moveWidth}}">
+        <movable-view out-of-bounds="true" 
+                      direction="horizontal" 
+                      x="{{item.xmove}}"
+                      inertia="true" 
+                      data-index="{{index}}"
+                      data-id="{{item._id}}"
+                      bindtouchstart="handleTouchStart"
+                      bindtouchend="handleTouchEnd"
+                      bindchange="handleMovableChange"
+                      catchtap="viewNote"
+                      class="note-list_del txt">
+          <text class="note-content title" data-id="{{item._id}}">{{item.title}}</text>
+          <text class="note-content content" data-id="{{item._id}}">{{item.time}} {{item.area}}</text>
+        </movable-view>
+      </movable-area>
       <view data-index="{{index}}" class="note-list_del handle">
         <view wx:if="{{currentTab == '0'}}" class="change" bindtap="changeItem" 
         data-id="{{item._id}}">标记为已办</view>

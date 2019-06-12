@@ -44,6 +44,16 @@ page {
   background-color:#fff;
   border-left:5rpx solid #ccc;
 }
+.note-list movable-area {
+  display:inline-block;
+  height: 130rpx;
+}
+.note-list movable-view {
+  height: 130rpx;
+  width: 100vw;
+  background: #fff;
+  z-index: 999;
+}
 .note-content {
   display: block;
   height: 50rpx;
@@ -64,10 +74,10 @@ page {
   position: absolute; 
   top:0; 
 } 
-.note-list_del.txt{ 
+.note-list_del.txt{
   position: relative;
   background-color: #fff; 
-  width: 100%;
+  /* width: 100%; */
   height: 100%; 
   z-index: 5; 
   padding:0 10rpx; 
@@ -89,12 +99,12 @@ page {
 .change{
   display: inline-block;
   background-color: #ccc; 
-  width: 230rpx;
+  width: 210rpx;
 }
 .del{
   display: inline-block;
   background-color: #e64340; 
-  width: 180rpx;
+  width: 120rpx;
 }
 /* 新增按钮 */
 .bt{
