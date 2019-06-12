@@ -1,0 +1,39 @@
+.bg_img{
+  margin: 0;
+  width: 100%;
+  height: 410rpx;
+  line-height: 410rpx;
+  background-color: #5095f766;
+}
+.user-img{
+  margin: 0 auto;  
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  width: 240rpx;
+  height: 355rpx;
+}
+.user-img-url{
+  margin: 115rpx auto;  
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 50%;
+}
+.user-txt{
+  display:flex;
+  justify-content:center;
+  width:100%;
+  height:155rpx;
+  margin:0 auto;
+  background-color: #5095f766;
+}
+.user-txt-name{
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  height: 100rpx;
+  color: #515a6e;
+}

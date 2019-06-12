@@ -1,1 +1,5 @@
-<view>鸡汤美文~~~~~~~~~~~敬请期待</view>
+<view class="bg_img">
+  <view class="user-img"><open-data type="userAvatarUrl" class="user-img-url"></open-data></view>
+</view>
+<view class="user-txt"><open-data type="userNickName" lang="zh_CN" class="user-txt-name"></open-data></view>
+<view></view>

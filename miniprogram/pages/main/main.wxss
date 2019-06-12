@@ -39,9 +39,10 @@ page {
 .note-list {
   position: relative;
   height: 130rpx;
-  margin: 10rpx;
-  padding-left: 20rpx;
-  background-color: #fff;
+  margin:10rpx 10rpx 10rpx 0;
+  padding-left:10rpx;
+  background-color:#fff;
+  border-left:5rpx solid #ccc;
 }
 .note-content {
   display: block;

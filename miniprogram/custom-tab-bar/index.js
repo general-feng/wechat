@@ -10,8 +10,8 @@ Component({
       text: "事项列表"
     }, {
         pagePath: "/pages/user/user",
-      iconPath: "/images/card.png",
-        selectedIconPath: "/images/card_fill.png",
+      iconPath: "/images/mine.png",
+        selectedIconPath: "/images/mine_fill.png",
       text: "个人信息"
     }]
   },

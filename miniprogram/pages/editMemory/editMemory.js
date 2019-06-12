@@ -93,7 +93,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const theme = ['待办事宜', '已办事宜', '备忘', '随笔'][options.evtTtype], id = Number(options.id);
+    const theme = ['待办事项', '已办事项', '备忘录', '随笔'][options.evtTtype], id = Number(options.id);
     this.setData({
       theme: theme,
       evtType: options.evtTtype,

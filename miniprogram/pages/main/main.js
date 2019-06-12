@@ -88,7 +88,7 @@ Page({
   insertData: function () {
     const type = this.data.currentTab;
     wx.navigateTo({
-      url: `../editMemory/editMemory?type=${type}`,
+      url: `../editMemory/editMemory?evtTtype=${type}&optType=add`,
     })
   },
   getNotes(){
