@@ -1,6 +1,6 @@
 /* main.wxss */
 @import "../../style/weui.wxss";
-
+@import "../template/tabBar.wxss";
 page {
   background: #f6f6f6;
 }

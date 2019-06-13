@@ -1,3 +1,5 @@
+
+@import "../template/tabBar.wxss";
 .bg_img{
   margin: 0;
   width: 100%;

@@ -1,5 +1,6 @@
 // miniprogram/pages/main/main.js
 // 默认声明一个函数记录notes显示的数据---删除状态
+const { tabBar, methods } = require("../template/tabBar.js");
 var initdata = function (that) {
   var notes = that.data.notes
   for (var i = 0; i < notes.length; i++) {
@@ -20,12 +21,18 @@ Page({
     delBtnWidth: 335, //删除按钮宽度单位（rpx）
     notes: [],
     currentTab: '0',
-    moveWidth: ''
+    moveWidth: '',
+    tabBar
   },
+  ...methods,
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    tabBar.selected = 0;
+    this.setData({
+      tabBar
+    })
     var that = this;
     let curType = this.data.currentTab;
     //  调用login云函数获取openid
