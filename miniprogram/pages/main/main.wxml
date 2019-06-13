@@ -23,7 +23,9 @@
                       catchtap="viewNote"
                       class="note-list_del txt">
           <text class="note-content title" data-id="{{item._id}}">{{item.title}}</text>
-          <text class="note-content content" data-id="{{item._id}}">{{item.time}} {{item.area}}</text>
+          <text class="note-time content">{{item.time}}</text>
+          <text class="note-content content" data-id="{{item._id}}">{{item.area}}</text>
+          <!-- <text class="note-content content" data-id="{{item._id}}">{{item.time}}</text> -->
         </movable-view>
       </movable-area>
       <view data-index="{{index}}" class="note-list_del handle">

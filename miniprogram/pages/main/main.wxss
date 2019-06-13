@@ -50,13 +50,13 @@ page {
 }
 .note-list movable-view {
   height: 130rpx;
-  width: 100vw;
+  width: calc(100vw - 60rpx);
   background: #fff;
   z-index: 999;
 }
 .note-content {
   display: block;
-  height: 50rpx;
+  height: 40rpx;
   overflow: hidden;
   white-space: nowrap;
   text-overflow:ellipsis;
@@ -64,6 +64,12 @@ page {
 .title {
   font-size: 16px;
   color: #4B4D53;
+  padding-top: 20rpx;
+}
+.note-time{
+  display: block;
+  height: 20rpx;
+  text-align: right;
 }
 .content {
   font-size: 12px;
