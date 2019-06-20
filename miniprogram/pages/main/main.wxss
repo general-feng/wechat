@@ -99,7 +99,7 @@ page {
   text-align: center;
   z-index: 4; 
   right: 0; 
-  font-size: 12px;
+  font-size: 14px;
   color: #fff 
 }
 .change{
