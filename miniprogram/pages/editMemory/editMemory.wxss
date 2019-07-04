@@ -34,7 +34,8 @@ button.save{
   border-radius: 0;
 }
 #textarea{
-  height:100%
+  width:calc(100% - 60rpx);
+  height: 100%;
 }
 .row{
   position: relative;
